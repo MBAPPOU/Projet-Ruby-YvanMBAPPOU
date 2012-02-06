@@ -1,0 +1,8 @@
+mKdir Projet-Ruby-YvanMBAPPOU
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:MBAPPOU/Projet-Ruby-YvanMBAPPOU.git
+ssh-keygen -t rsa -C "yvan.mbappou@enseeiht.fr"
+git push -u origin master
