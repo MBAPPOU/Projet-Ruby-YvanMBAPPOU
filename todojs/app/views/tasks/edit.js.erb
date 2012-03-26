@@ -1,0 +1,1 @@
+$('td a[ref="<%= edit_task_path(@task.id) %>"]').parent().parent().append(<td><%= escape_javascript(render 'form') %><td>);

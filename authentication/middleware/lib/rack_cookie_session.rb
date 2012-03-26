@@ -13,6 +13,11 @@ class RackCookieSession
       new_session = true
     end
     env[@env_session_id_key] = session_id
+    
+    
+    env["request"] = Rack::Request.new(env).params()
+    
+    
     status, headers, body = @app.call(env)
     headers["Set-Cookie"] = "#{@cookie_name}=#{session_id}" if new_session
     [status, headers, body]

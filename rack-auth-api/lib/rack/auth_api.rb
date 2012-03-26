@@ -7,12 +7,12 @@ class AuthApi
   
   def call(env)
     
+    # On recupère le contenu des informations d'athentification de l'environnement 'env'
     if env['HTTP_AUTHORIZATION']
             b64 = env['HTTP_AUTHORIZATION'].gsub!(/Basic /, "")
             # Si le header HTTP_AUTHORIZATION est positionné, les identifiants passés par ce headers doivent être vérifiés par l'appel d'un code externe.
             if (AuthApi.decode_http_authorize(b64) != nil)
-                    @uid = AuthApi.decode_http_authorize(b64).gsub!(/\n/,"" ).split(':')[0]
-                    @mdp = AuthApi.decode_http_authorize(b64).gsub!(/\n/,"" ).split(':')[1]
+                    @uid , @mdp = AuthApi.decode_http_authorize(b64).gsub!(/\n/,"" ).split(':')
             end
             # Le header HTTP_AUTHORIZATION est effacé dans tous les cas de 'env'.
             env.delete('HTTP_AUTHORIZATION')
@@ -24,7 +24,9 @@ class AuthApi
        verification = nil
     end
     
-    if ( verification != nil && verification == @uid )
+    evaluation = evaluate "#{verification}"
+    
+    if ( evaluation && evaluaion == @uid )
        env["rack.api.user"] = @uid
     end
     status, headers, body = @app.call(env)

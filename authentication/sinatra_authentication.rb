@@ -15,6 +15,11 @@ helpers do
   end
 end
 
+
+get '/test' do
+   body "#{env["request"]}"
+end
+
 get '/' do
   if current_user
     "Bonjour #{current_user}"

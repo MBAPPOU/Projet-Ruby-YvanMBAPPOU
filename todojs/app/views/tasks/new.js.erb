@@ -1,0 +1,4 @@
+$("form").remove();
+$("a[href='<%= new_task_path %>']").after("<%= escape_javascript(render 'form') %>");
+$("form#new_task").attr("data-remote", true);
+$("a[href='<%= new_task_path %>']").fadeOut();

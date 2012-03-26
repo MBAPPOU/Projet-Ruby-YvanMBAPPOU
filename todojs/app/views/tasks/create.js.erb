@@ -1,0 +1,3 @@
+$("body table tbody").append("<tr> <td><%= escape_javascript(@task.name) %></td> <td><%= escape_javascript(link_to 'Edit', edit_task_path(@task), :remote => true) %> </td> <td><%= escape_javascript(link_to 'Destroy', @task, confirm: 'Are you sure?', :remote => true, method: :delete) %></td> </tr>"); 
+$("form#new_task").remove();
+$("a[href='<%= new_task_path %>']").fadeIn();
